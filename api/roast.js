@@ -28,9 +28,11 @@ export default async function handler(req, res) {
 Analyze the photo and write a funny, sharp but never mean, racist, sexist or discriminatory roast in 3-5 sentences.
 Focus on visual details: expression, outfit, background, pose, hairstyle, accessories.
 IMPORTANT: Respond entirely in ${language}.
-After the roast, on a new line output ONLY this JSON with no extra text:
-{"style": X, "vibes": Y, "confidence": Z}
-where X, Y, Z are scores out of 10.`
+
+You MUST end your response with this exact format on a new line — replace the numbers with real scores:
+SCORES:{"style":7,"vibes":5,"confidence":8}
+
+Do not add any text after the JSON.`
           }
         ]
       }],
@@ -46,13 +48,13 @@ where X, Y, Z are scores out of 10.`
     const data = await geminiRes.json();
     const fullText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
 
-    const jsonMatch = fullText.match(/\{[\s\S]*\}/);
+    const jsonMatch = fullText.match(/SCORES:\s*(\{[^}]+\})/);
     let scores = { style: '?', vibes: '?', confidence: '?' };
     let roastText = fullText.trim();
 
     if (jsonMatch) {
       try {
-        scores = JSON.parse(jsonMatch[0]);
+        scores = JSON.parse(jsonMatch[1]);
         roastText = fullText.replace(jsonMatch[0], '').trim();
       } catch (e) {}
     }
