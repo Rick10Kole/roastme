@@ -1,0 +1,23 @@
+{
+  "name": "primary",
+  "version": "1.0.0",
+  "description": "``` roastme/ ├── index.html          ← Site complet (multilingue) ├── api/ │   ├── roast.js        ← Backend Gemini (clé sécurisée) │   └── counter.js      ← Compteur temps réel (Upstash) ├── vercel.json         ← Config déploiement └── README.md ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rick10Kole/roastme.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rick10Kole/roastme/issues"
+  },
+  "homepage": "https://github.com/Rick10Kole/roastme#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
